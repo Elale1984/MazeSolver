@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Stack;
+
 
 //starter code for MazeSolver
 //CST-201
@@ -18,6 +20,18 @@ public class Driver {
      */
     // implement this method
     public static void depthFirst(MazeCell start, MazeCell end) {
+
+        MazeCell current = start;
+
+        MyStack<MazeCell> path = new MyStack<>();
+
+        while (end.unVisited()){
+
+            start.setCoordinates(start.getRow() + 1, start.getCol());
+            if(start.unVisited()){
+
+            }
+        }
 
     }
 

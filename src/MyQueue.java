@@ -19,7 +19,7 @@ public class MyQueue<T extends Comparable<T>>{
     public void push(T v){
         Node<T> newHead = new Node<>(v);
 
-        newHead.nextNode = queueList.getHead();
+        newHead.nextCell = queueList.getHead();
         queueList.setHead(newHead);
     }
 
@@ -41,6 +41,6 @@ public class MyQueue<T extends Comparable<T>>{
 
     // using the SinglyLinkedList getHead().data to return the queueList front data
     public T front(){
-        return queueList.getHead().data;
+        return queueList.getHead().cell;
     }
 }

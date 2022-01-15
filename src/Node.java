@@ -1,13 +1,17 @@
-class Node<T>  {
-    T data;
-    Node<T> nextNode;
+class Node<MazeCell>  {
+   MazeCell cell;
+   Node<MazeCell> nextCell;
 
     // Constructor
-    Node(T data) {
-        this.data = data;
-        this.nextNode = null;
+
+
+    public Node(MazeCell cell) {
+        this.cell = cell;
+        this.nextCell = null;
     }
 
-
-
+    public Node(){
+        this.cell = null;
+        this.nextCell = null;
+    }
 }
