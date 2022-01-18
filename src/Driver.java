@@ -1,6 +1,10 @@
+import javax.crypto.Mac;
+import javax.xml.crypto.dsig.spec.XPathFilterParameterSpec;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 
 
@@ -9,6 +13,11 @@ import java.util.Stack;
 
 public class Driver {
 
+    public static MazeCell[][] cells;
+    public static int [][] grid;
+    public static int rows;
+    public static int cols;
+    public static MyStack<MazeCell> path = new MyStack<>();
     /**
      *
      * @param start
@@ -21,18 +30,41 @@ public class Driver {
     // implement this method
     public static void depthFirst(MazeCell start, MazeCell end) {
 
-        MazeCell current = start;
+        int r = start.getRow();
+        int c = start.getCol();
 
-        MyStack<MazeCell> path = new MyStack<>();
+        path.push(start);
 
-        while (end.unVisited()){
+        while (path.head.cell != end){
 
-            start.setCoordinates(start.getRow() + 1, start.getCol());
-            if(start.unVisited()){
+            if(grid[r][c + 1] == 1 && isValidCell(r,c + 1)){
+                c = c + 1;
+                path.push(new MazeCell(r,c));
+            }
+            else if (grid[r + 1][c] == 1 && isValidCell(r + 1,c)){
+                r = r + 1;
+                path.push(new MazeCell(r,c));
+            }
+            else if (grid[r][c - 1] == 1 && isValidCell(r,c - 1)){
+                c = c - 1;
+                path.push(new MazeCell(r,c));
+            }
+            else if (grid[r - 1][c] == 1 && isValidCell(r - 1,c)){
+                r = r - 1;
+                path.push(new MazeCell(r,c));
+            }
+            else {
 
+                System.out.println(path);
             }
         }
+    }
 
+    public static boolean isValidCell(int r, int c) {
+       if (r >= 0 && r < rows && c >= 0 && c < cols)
+           return true;
+       else
+           return false;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -40,11 +72,11 @@ public class Driver {
         //create the Maze from the file
         Scanner fin = new Scanner(new File("Maze.in"));
         //read in the rows and cols
-        int rows = fin.nextInt();
-        int cols = fin.nextInt();
+        rows = fin.nextInt();
+        cols = fin.nextInt();
 
         //create the maze
-        int [][] grid = new int[rows][cols];
+        grid = new int[rows][cols];
 
         //read in the data from the file to populate
         for (int i = 0; i < rows; i++) {
@@ -67,7 +99,7 @@ public class Driver {
         }
 
         //make a 2-d array of cells
-        MazeCell[][] cells = new MazeCell[rows][cols];
+        cells  = new MazeCell[rows][cols];
 
         //populate with MazeCell obj - default obj for walls
 
@@ -96,7 +128,7 @@ public class Driver {
         System.out.println("start:"+start+" end:"+end);
 
         //solve it!
-        //depthFirst(start, end);
+        depthFirst(start, end);
 
     }
 }
