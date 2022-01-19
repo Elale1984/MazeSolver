@@ -1,4 +1,12 @@
-
+/**
+ * MyStack Class
+ * @param <MazeCell>
+ *
+ *     This is an implementation of a stack that is of type MazeCell. It has basic methods for the use of
+ *     a stack implementation for a maze.
+ * @author Edward Lale
+ *      All work was completed by Edward Lale
+ */
 
 public class MyStack<MazeCell> {
 
@@ -22,7 +30,7 @@ public class MyStack<MazeCell> {
     }
     // using the SinglyLinkedList isEmpty() method to check if the stackList is empty
     public boolean isEmpty(){
-        return stackSize == 0;
+        return this.head == null;
     }
 
 
@@ -35,13 +43,17 @@ public class MyStack<MazeCell> {
 
     @Override
     public String toString() {
+
+        System.out.println("\nMaze Solved!! \n");
         Node<MazeCell> currentNode = this.head;
         StringBuilder list = new StringBuilder();
+        list.append("Path:\nEnd <- ").append(currentNode.cell.toString());
+        currentNode = currentNode.nextCell;
         while (currentNode != null){
-            list.append("Cell = ").append(currentNode.cell.toString());
+            list.append(" <- ").append(currentNode.cell.toString());
             currentNode = currentNode.nextCell;
         }
-
+        list.append(" <- Start");
         return list.toString();
     }
 }

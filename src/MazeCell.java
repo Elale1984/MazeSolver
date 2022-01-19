@@ -78,9 +78,7 @@ class MazeCell {
         MazeCell other = (MazeCell) obj;
         if (col != other.col)
             return false;
-        if (row != other.row)
-            return false;
-        return true;
+        return row == other.row;
     }
 
     // set visited status to true

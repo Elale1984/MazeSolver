@@ -1,11 +1,6 @@
-import javax.crypto.Mac;
-import javax.xml.crypto.dsig.spec.XPathFilterParameterSpec;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.Stack;
 
 
 //starter code for MazeSolver
@@ -17,7 +12,6 @@ public class Driver {
     public static int [][] grid;
     public static int rows;
     public static int cols;
-    public static MyStack<MazeCell> path = new MyStack<>();
     /**
      *
      * @param start
@@ -29,14 +23,59 @@ public class Driver {
      */
     // implement this method
     public static void depthFirst(MazeCell start, MazeCell end) {
+        MyStack<MazeCell> path = new MyStack<>();
+        path.push(start);
 
+        while (!path.isEmpty()){
+            int currentRow = path.head.cell.getRow();
+            int currentCol = path.head.cell.getCol();
+
+            if(isValidCell(currentRow, currentCol + 1) &&
+                    cells[currentRow][currentCol + 1].unVisited() && (grid[currentRow][currentCol + 1] == 1 ||
+                            grid[currentRow][currentCol + 1] == 4)){
+                path.push(cells[currentRow][currentCol + 1]);
+                path.head.cell.visit();
+                System.out.println(path.head.cell.toString());
+            }
+            else if (isValidCell(currentRow + 1, currentCol) &&
+                    cells[currentRow + 1][currentCol].unVisited() && (grid[currentRow + 1][currentCol] == 1 ||
+                    grid[currentRow + 1][currentCol] == 4)){
+                path.push(cells[currentRow + 1][currentCol]);
+                path.head.cell.visit();
+                System.out.println(path.head.cell.toString());
+            }
+            else if (isValidCell(currentRow, currentCol - 1) &&
+                    cells[currentRow][currentCol - 1].unVisited() && (grid[currentRow][currentCol - 1] == 1 ||
+                    grid[currentRow][currentCol - 1] == 4)){
+                path.push(cells[currentRow][currentCol -1]);
+                path.head.cell.visit();
+                System.out.println(path.head.cell.toString());
+            }
+            else if (isValidCell(currentRow - 1, currentCol) &&
+                    cells[currentRow - 1][currentCol].unVisited() && (grid[currentRow - 1][currentCol] == 1 ||
+                    grid[currentRow - 1][currentCol] == 4)){
+                path.push(cells[currentRow - 1][currentCol]);
+                path.head.cell.visit();
+                System.out.println(path.head.cell.toString());
+            }
+            else {
+                if(path.head.cell == null)
+                    System.out.println("No solution exists");
+                else {
+                    path.pop();
+                    System.out.println(path.head.cell.toString());
+                }
+            }
+
+            if(path.head.cell == end){
+                System.out.println(path);
+                return;
+            }
+        }
     }
 
     public static boolean isValidCell(int r, int c) {
-       if (r >= 0 && r < rows && c >= 0 && c < cols)
-           return true;
-       else
-           return false;
+        return r >= 0 && r < rows && c >= 0 && c < cols;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -101,6 +140,7 @@ public class Driver {
 
         //solve it!
         depthFirst(start, end);
+
 
     }
 }
