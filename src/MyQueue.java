@@ -1,14 +1,16 @@
-
 /**
- * The MyQueue class uses the SinglyLinkedList class to provide
- * its underline structure
- **/
+ * MyQueue Class
+ * @param <MazeCell>
+ *     This is an implementation of type MazeCell.
+ * @author Edward Lale
+ *      All work was completed by Edward Lale
+ */
 
 public class MyQueue<MazeCell>{
 
-    Node<MazeCell> headCell;
-    Node<MazeCell> tailCell;
-    int queueSize;
+    final Node<MazeCell> headCell;
+    final Node<MazeCell> tailCell;
+    final int queueSize;
 
     // Constructor
     public MyQueue(){
