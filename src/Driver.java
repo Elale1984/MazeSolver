@@ -30,34 +30,6 @@ public class Driver {
     // implement this method
     public static void depthFirst(MazeCell start, MazeCell end) {
 
-        int r = start.getRow();
-        int c = start.getCol();
-
-        path.push(start);
-
-        while (path.head.cell != end){
-
-            if(grid[r][c + 1] == 1 && isValidCell(r,c + 1)){
-                c = c + 1;
-                path.push(new MazeCell(r,c));
-            }
-            else if (grid[r + 1][c] == 1 && isValidCell(r + 1,c)){
-                r = r + 1;
-                path.push(new MazeCell(r,c));
-            }
-            else if (grid[r][c - 1] == 1 && isValidCell(r,c - 1)){
-                c = c - 1;
-                path.push(new MazeCell(r,c));
-            }
-            else if (grid[r - 1][c] == 1 && isValidCell(r - 1,c)){
-                r = r - 1;
-                path.push(new MazeCell(r,c));
-            }
-            else {
-
-                System.out.println(path);
-            }
-        }
     }
 
     public static boolean isValidCell(int r, int c) {
